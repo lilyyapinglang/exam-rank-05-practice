@@ -32,4 +32,16 @@ int main()
     std::cout << "(d >= a) = " << (d >= a) << std::endl;
     std::cout << "(d == a) = " << (d == a) << std::endl;
     std::cout << "(d != a) = " << (d != a) << std::endl;
+
+    // Test non subject edge cases 
+    bigint f(0);
+    std::cout << "f = " << f << std::endl;
+    std::cout << "f << 5 = " << (f << 5) << std::endl;
+    std::cout << "f >> 5 = " << (f >> 5) << std::endl;
+    std::cout << "f >> 0 = " << (f >> 0) << std::endl;
+    std::cout << "f << 0 = " << (f << 0) << std::endl;
+	std::cout << "bigint(199) + bigint(1) = " << bigint(199) + bigint(1) << std::endl;
+    std::cout << "bigint(42) == bigint(42) = " << (bigint(42) == bigint(42)) << std::endl;
+    std::cout << "bigint(42) != bigint(42) = " << (bigint(42) != bigint(42)) << std::endl;
+
 }
