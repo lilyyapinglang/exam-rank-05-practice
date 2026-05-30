@@ -74,8 +74,8 @@ bigint& bigint::operator+=(const bigint& other)
 	std::string result;
 	int carry;
 	int sum;
-	int a;
-	int b;
+	int leftNum;
+	int rightNum;
 	int i;
 	int j;
 
@@ -85,13 +85,13 @@ bigint& bigint::operator+=(const bigint& other)
 	j = static_cast<int>(other.digits.size()) - 1;
 	while (i >= 0 || j >= 0 || carry != 0)
 	{
-		a = 0;
-		b = 0;
+		leftNum = 0;
+		rightNum = 0;
 		if (i >= 0)
-			a = digits[i--] - '0';
+			leftNum = digits[i--] - '0';
 		if (j >= 0)
-			b = other.digits[j--] - '0';
-		sum = a + b + carry;
+			rightNum = other.digits[j--] - '0';
+		sum = leftNum + rightNum + carry;
 		result.insert(result.begin(), static_cast<char>('0' + (sum % 10)));
 		carry = sum / 10;
 	}
@@ -129,7 +129,27 @@ bigint& bigint::operator<<=(unsigned int shift)
 	return (*this);
 }
 
+bigint& bigint::operator<<=(const bigint& shift)
+{
+	std::size_t amount;
+
+	amount = shift.toSizeLimit(digits.max_size());
+	if (amount > digits.max_size() - digits.size())
+		return (*this);
+	if (digits != "0")
+		digits.append(amount, '0');
+	return (*this);
+}
+
 bigint bigint::operator<<(unsigned int shift) const
+{
+	bigint result(*this);
+
+	result <<= shift;
+	return (result);
+}
+
+bigint bigint::operator<<(const bigint& shift) const
 {
 	bigint result(*this);
 
