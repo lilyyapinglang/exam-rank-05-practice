@@ -37,7 +37,12 @@ VECT2_SRCS   := $(VECT2_DIR)/main.cpp \
 				$(VECT2_DIR)/vect2.cpp
 BIGINT_SRCS  := $(BIGINT_DIR)/main.cpp \
 				$(BIGINT_DIR)/bigint.cpp
-POLYSET_SRCS := $(POLYSET_DIR)/main.cpp
+POLYSET_SRCS := $(POLYSET_DIR)/main.cpp \
+				$(POLYSET_DIR)/array_bag.cpp \
+				$(POLYSET_DIR)/tree_bag.cpp \
+				$(POLYSET_DIR)/searchable_array_bag.cpp \
+				$(POLYSET_DIR)/searchable_tree_bag.cpp \
+				$(POLYSET_DIR)/set.cpp
 LIFE_SRCS    := $(LIFE_DIR)/main.c
 BSQ_SRCS     := $(BSQ_DIR)/main.c
 
@@ -140,7 +145,7 @@ run_bigint: bigint
 
 run_polyset: polyset
 	@echo "🚀 Running polyset\n"
-	@$(POLYSET_BIN)
+	@$(POLYSET_BIN) 1 2 3 4 5 5 3
 
 run_life: life
 	@echo "🚀 Running Life\n"
