@@ -5,10 +5,11 @@
 # 🧱 Compilers & Flags
 CC       := cc
 CXX      := c++
-# CFLAGS   := -Wall -Wextra -Werror -g3
-# CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g3
-CFLAGS   := -g3
-CXXFLAGS := -g3 -std=c++98
+CFLAGS   := -Wall -Wextra -Werror -g3
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -g3
+# Debug only, without warnings:
+# CFLAGS   := -g3
+# CXXFLAGS := -g3 -std=c++98
 
 # 📁 Project Directories
 VECT2_DIR   := level-0/vect2

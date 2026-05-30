@@ -1,8 +1,6 @@
 #include "bigint.hpp"
 
-bigint::bigint(void) : digits("0")
-{
-}
+bigint::bigint(void) : digits("0") {}
 
 bigint::bigint(unsigned long num)
 {
@@ -23,15 +21,23 @@ bigint::bigint(const bigint& other)
 	*this = other;
 }
 
-bigint::~bigint(void)
-{
-}
+bigint::~bigint(void) {}
 
 bigint& bigint::operator=(const bigint& other)
 {
 	if (this != &other)
 		digits = other.digits;
 	return (*this);
+}
+
+static unsigned int stringToUINT(std::string str)
+{
+	std::stringstream ss(str);
+	unsigned int res;
+
+	res = 0;
+	ss >> res;
+	return (res);
 }
 
 void bigint::normalize(void)
@@ -43,25 +49,6 @@ void bigint::normalize(void)
 		digits = "0";
 	else if (pos > 0)
 		digits.erase(0, pos);
-}
-
-std::size_t bigint::toSizeLimit(std::size_t limit) const
-{
-	std::size_t result;
-	std::size_t i;
-
-	result = 0;
-	i = 0;
-	while (i < digits.size())
-	{
-		if (result > limit / 10)
-			return (limit + 1);
-		result = result * 10 + (digits[i] - '0');
-		if (result > limit)
-			return (limit + 1);
-		i++;
-	}
-	return (result);
 }
 
 const std::string& bigint::getDigits(void) const
@@ -131,13 +118,7 @@ bigint& bigint::operator<<=(unsigned int shift)
 
 bigint& bigint::operator<<=(const bigint& shift)
 {
-	std::size_t amount;
-
-	amount = shift.toSizeLimit(digits.max_size());
-	if (amount > digits.max_size() - digits.size())
-		return (*this);
-	if (digits != "0")
-		digits.append(amount, '0');
+	*this <<= stringToUINT(shift.digits);
 	return (*this);
 }
 
@@ -168,13 +149,7 @@ bigint& bigint::operator>>=(unsigned int shift)
 
 bigint& bigint::operator>>=(const bigint& shift)
 {
-	std::size_t amount;
-
-	amount = shift.toSizeLimit(digits.size());
-	if (amount >= digits.size())
-		digits = "0";
-	else
-		digits.erase(digits.size() - amount);
+	*this >>= stringToUINT(shift.digits);
 	return (*this);
 }
 

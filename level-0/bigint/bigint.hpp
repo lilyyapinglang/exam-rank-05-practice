@@ -3,7 +3,7 @@
 
 # include <iostream>
 # include <string>
-# include <cstddef>
+# include <sstream>
 
 class bigint
 {
@@ -11,7 +11,6 @@ class bigint
 		std::string digits;
 
 		void normalize(void);
-		std::size_t toSizeLimit(std::size_t limit) const;
 
 	public:
 		bigint(void);
