@@ -1,6 +1,6 @@
 #include "bigint.hpp"
 
-bigint::bigint(void) : digits("0") {}
+bigint::bigint() : digits("0") {}
 
 bigint::bigint(unsigned long num)
 {
@@ -15,7 +15,7 @@ bigint::bigint(const bigint& other)
 	*this = other;
 }
 
-bigint::~bigint(void) {}
+bigint::~bigint() {}
 
 bigint& bigint::operator=(const bigint& other)
 {
@@ -34,7 +34,7 @@ static unsigned int stringToUINT(std::string str)
 	return (res);
 }
 
-void bigint::normalize(void)
+void bigint::normalize()
 {
 	std::size_t pos;
 
@@ -45,7 +45,7 @@ void bigint::normalize(void)
 		digits.erase(0, pos);
 }
 
-const std::string& bigint::getDigits(void) const
+const std::string& bigint::getDigits() const
 {
 	return (digits);
 }
@@ -89,7 +89,7 @@ bigint bigint::operator+(const bigint& other) const
 	return (result);
 }
 
-bigint& bigint::operator++(void)
+bigint& bigint::operator++()
 {
 	*this += 1;
 	return (*this);

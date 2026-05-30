@@ -10,20 +10,20 @@ class bigint
 	private:
 		std::string digits;
 
-		void normalize(void);
+		void normalize();
 
 	public:
-		bigint(void);
+		bigint();
 		bigint(unsigned long num);
 		bigint(const bigint& other);
-		~bigint(void);
+		~bigint();
 
 		bigint& operator=(const bigint& other);
 
 		bigint& operator+=(const bigint& other);
 		bigint operator+(const bigint& other) const;
 
-		bigint& operator++(void);
+		bigint& operator++();
 		bigint operator++(int);
 
 		bigint& operator<<=(unsigned int shift);
@@ -43,7 +43,7 @@ class bigint
 		bool operator==(const bigint& other) const;
 		bool operator!=(const bigint& other) const;
 
-		const std::string& getDigits(void) const;
+		const std::string& getDigits() const;
 };
 
 std::ostream& operator<<(std::ostream& out, const bigint& num);
