@@ -37,9 +37,9 @@ VECT2_SRCS   := $(VECT2_DIR)/main.cpp \
 				$(VECT2_DIR)/vect2.cpp
 BIGINT_SRCS  := $(BIGINT_DIR)/main.cpp \
 				$(BIGINT_DIR)/bigint.cpp
-POLYSET_SRCS := $(POLYSET_DIR)/main.cpp \
-				$(POLYSET_DIR)/array_bag.cpp \
-				$(POLYSET_DIR)/tree_bag.cpp \
+POLYSET_SRCS := $(POLYSET_DIR)/given-code/main.cpp \
+				$(POLYSET_DIR)/given-code/array_bag.cpp \
+				$(POLYSET_DIR)/given-code/tree_bag.cpp \
 				$(POLYSET_DIR)/searchable_array_bag.cpp \
 				$(POLYSET_DIR)/searchable_tree_bag.cpp \
 				$(POLYSET_DIR)/set.cpp
@@ -51,6 +51,8 @@ BIGINT_OBJS  := $(BIGINT_SRCS:.cpp=.o)
 POLYSET_OBJS := $(POLYSET_SRCS:.cpp=.o)
 LIFE_OBJS    := $(LIFE_SRCS:.c=.o)
 BSQ_OBJS     := $(BSQ_SRCS:.c=.o)
+
+$(POLYSET_OBJS): CXXFLAGS += -I$(POLYSET_DIR) -I$(POLYSET_DIR)/given-code
 
 # 📦 All binaries together
 BINS := \
