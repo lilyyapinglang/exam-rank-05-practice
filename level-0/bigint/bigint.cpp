@@ -4,16 +4,10 @@ bigint::bigint(void) : digits("0") {}
 
 bigint::bigint(unsigned long num)
 {
-	if (num == 0)
-	{
-		digits = "0";
-		return;
-	}
-	while (num > 0)
-	{
-		digits.insert(digits.begin(), static_cast<char>('0' + (num % 10)));
-		num /= 10;
-	}
+	std::stringstream ss;
+
+	ss << num;
+	digits = ss.str();
 }
 
 bigint::bigint(const bigint& other)
