@@ -1,6 +1,6 @@
 #include "vect2.hpp"
 
-vect2::vect2(void)
+vect2::vect2()
 {
 	x = 0;
 	y = 0;
@@ -17,9 +17,7 @@ vect2::vect2(const vect2& other)
 	*this = other;
 }
 
-vect2::~vect2(void)
-{
-}
+vect2::~vect2() {}
 
 vect2& vect2::operator=(const vect2& other)
 {
@@ -90,12 +88,12 @@ vect2 vect2::operator*(int scalar) const
 	return (result);
 }
 
-vect2 vect2::operator-(void) const
+vect2 vect2::operator-() const
 {
 	return (vect2(-x, -y));
 }
 
-vect2& vect2::operator++(void)
+vect2& vect2::operator++()
 {
 	++x;
 	++y;
@@ -110,7 +108,7 @@ vect2 vect2::operator++(int)
 	return (copy);
 }
 
-vect2& vect2::operator--(void)
+vect2& vect2::operator--()
 {
 	--x;
 	--y;

@@ -11,10 +11,10 @@ private:
 	int y;
 
 public:
-	vect2(void);
+	vect2();
 	vect2(int xValue, int yValue);
 	vect2(const vect2& other);
-	~vect2(void);
+	~vect2();
 
 	vect2& operator=(const vect2& other);
 
@@ -28,12 +28,12 @@ public:
 	vect2 operator+(const vect2& other) const;
 	vect2 operator-(const vect2& other) const;
 	vect2 operator*(int scalar) const;
-	vect2 operator-(void) const;
+	vect2 operator-() const;
 
-	vect2& operator++(void);
+	vect2& operator++();
 	vect2 operator++(int);
 
-	vect2& operator--(void);
+	vect2& operator--();
 	vect2 operator--(int);
 
 	bool operator==(const vect2& other) const;
