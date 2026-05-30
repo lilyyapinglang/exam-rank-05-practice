@@ -43,5 +43,7 @@ int main()
 	std::cout << "bigint(199) + bigint(1) = " << bigint(199) + bigint(1) << std::endl;
     std::cout << "bigint(42) == bigint(42) = " << (bigint(42) == bigint(42)) << std::endl;
     std::cout << "bigint(42) != bigint(42) = " << (bigint(42) != bigint(42)) << std::endl;
+    std::cout << "bigint(42) < bigint(42) = " << (bigint(42) < bigint(42)) << std::endl;
+    std::cout << "bigint(42) > bigint(42) = " << (bigint(42) > bigint(42)) << std::endl;
 
 }
