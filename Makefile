@@ -34,7 +34,8 @@ BSQ_BIN     := $(BSQ_DIR)/$(BSQ_NAME)
 # 🧩 Source / Object lists (explicit files)
 VECT2_SRCS   := $(VECT2_DIR)/main.cpp \
 				$(VECT2_DIR)/vect2.cpp
-BIGINT_SRCS  := $(BIGINT_DIR)/main.cpp
+BIGINT_SRCS  := $(BIGINT_DIR)/main.cpp \
+				$(BIGINT_DIR)/bigint.cpp
 POLYSET_SRCS := $(POLYSET_DIR)/main.cpp
 LIFE_SRCS    := $(LIFE_DIR)/main.c
 BSQ_SRCS     := $(BSQ_DIR)/main.c
