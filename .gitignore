@@ -1,0 +1,24 @@
+# Exam Rank 05 binaries
+level-0/vect2/vect2
+level-0/bigint/bigint
+level-0/polyset/polyset
+level-1/Life/life
+level-1/BSQ/bsq
+
+# Objects / dependencies
+/obj
+*.o
+*.d
+
+# Debug
+*.dSYM/
+vgcore.*
+core
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
