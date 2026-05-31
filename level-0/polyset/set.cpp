@@ -1,16 +1,10 @@
 #include "set.hpp"
 
-set::set() : bag(0)
-{
-}
+set::set() : bag(0) {}
 
-set::set(searchable_bag &source) : bag(&source)
-{
-}
+set::set(searchable_bag &source) : bag(&source) {}
 
-set::set(set const &other) : bag(other.bag)
-{
-}
+set::set(set const &other) : bag(other.bag) {}
 
 set &set::operator=(set const &other)
 {
@@ -19,9 +13,7 @@ set &set::operator=(set const &other)
 	return (*this);
 }
 
-set::~set()
-{
-}
+set::~set() {}
 
 void set::insert(int value)
 {
