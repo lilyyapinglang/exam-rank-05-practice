@@ -44,7 +44,8 @@ POLYSET_SRCS := $(POLYSET_DIR)/given-code/main.cpp \
 				$(POLYSET_DIR)/searchable_tree_bag.cpp \
 				$(POLYSET_DIR)/set.cpp
 LIFE_SRCS    := $(LIFE_DIR)/main.c
-BSQ_SRCS     := $(BSQ_DIR)/main.c
+BSQ_SRCS     := $(BSQ_DIR)/main.c \
+				$(BSQ_DIR)/bsq.c
 
 VECT2_OBJS   := $(VECT2_SRCS:.cpp=.o)
 BIGINT_OBJS  := $(BIGINT_SRCS:.cpp=.o)
@@ -173,7 +174,38 @@ run_life: life
 
 run_bsq: bsq
 	@echo "🚀 Running BSQ\n"
-	@$(BSQ_BIN)
+
+	@echo "🧪 Test 1: subject example"
+	@$(BSQ_BIN) $(BSQ_DIR)/tests/example_file | cat -e
+	@echo
+
+	@echo "🧪 Test 2: 1x1 empty"
+	@$(BSQ_BIN) $(BSQ_DIR)/tests/map1_empty | cat -e
+	@echo
+
+	@echo "🧪 Test 3: 1x1 obstacle"
+	@$(BSQ_BIN) $(BSQ_DIR)/tests/map2_obstacle | cat -e
+	@echo
+
+	@echo "🧪 Test 4: 3x5 no obstacle"
+	@$(BSQ_BIN) $(BSQ_DIR)/tests/map3_no_obstacle | cat -e
+	@echo
+
+	@echo "🧪 Test 5: priority top-left"
+	@$(BSQ_BIN) $(BSQ_DIR)/tests/map4_priority | cat -e
+	@echo
+
+	@echo "🧪 Test 6: bad map, different line width"
+	@$(BSQ_BIN) $(BSQ_DIR)/tests/bad1_width 2>&1 | cat -e
+	@echo
+
+	@echo "🧪 Test 7: bad map, same chars"
+	@$(BSQ_BIN) $(BSQ_DIR)/tests/bad2_same_chars 2>&1 | cat -e
+	@echo
+
+	@echo "🧪 Test 8: bad map, extra line"
+	@$(BSQ_BIN) $(BSQ_DIR)/tests/bad3_extra_line 2>&1 | cat -e
+	@echo
 
 run_all: all
 	@echo "🚀 Running all binaries (in order)"
