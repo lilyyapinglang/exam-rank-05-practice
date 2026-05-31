@@ -1,57 +1,44 @@
 #include "bsq.h"
 
-static int	isPrint(char c)
+static int	checkChars(tMap *map)
 {
-	return (c >= 33 && c <= 126);
-}
-
-static int	isDigit(char c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-static int	skipSpaces(char *line, int pos)
-{
-	while (line[pos] == ' ')
-		pos++;
-	return (pos);
-}
-
-static int	parseHead(char *line, tMap *map)
-{
-	int	pos;
-	int	num;
-
-	pos = 0;
-	num = 0;
-	if (!isDigit(line[pos]))
-		return (0);
-	while (isDigit(line[pos]))
-	{
-		num = num * 10 + line[pos] - '0';
-		pos++;
-	}
-	if (num <= 0)
-		return (0);
-	map->rows = num;
-	pos = skipSpaces(line, pos);
-	if (!isPrint(line[pos]))
-		return (0);
-	map->empty = line[pos++];
-	pos = skipSpaces(line, pos);
-	if (!isPrint(line[pos]))
-		return (0);
-	map->obs = line[pos++];
-	pos = skipSpaces(line, pos);
-	if (!isPrint(line[pos]))
-		return (0);
-	map->full = line[pos++];
-	pos = skipSpaces(line, pos);
-	if (line[pos] != '\n' && line[pos] != '\0')
+	if (map->rows <= 0)
 		return (0);
 	if (map->empty == map->obs || map->empty == map->full
 		|| map->obs == map->full)
 		return (0);
+	return (1);
+}
+
+static int	parseHead(FILE *file, tMap *map)
+{
+	char	*line;
+	size_t	size;
+	ssize_t	len;
+	int		pos;
+
+	if (fscanf(file, "%d %c %c %c", &map->rows,
+			&map->empty, &map->obs, &map->full) != 4)
+		return (0);
+	if (checkChars(map) == 0)
+		return (0);
+	line = NULL;
+	size = 0;
+	len = getline(&line, &size, file);
+	if (len == -1)
+	{
+		free(line);
+		return (0);
+	}
+	pos = 0;
+	while (line[pos] == ' ')
+		pos++;
+	if (line[pos] != '\n' && line[pos] != '\0')
+	{
+		free(line);
+		return (0);
+	}
+	free(line);
 	return (1);
 }
 
@@ -90,20 +77,13 @@ int	readMap(FILE *file, tMap *map)
 	ssize_t	len;
 	int		row;
 
-	line = NULL;
-	size = 0;
-	len = getline(&line, &size, file);
-	if (len == -1 || parseHead(line, map) == 0)
-	{
-		free(line);
+	if (parseHead(file, map) == 0)
 		return (0);
-	}
 	map->grid = calloc(map->rows, sizeof(char *));
 	if (map->grid == NULL)
-	{
-		free(line);
 		return (0);
-	}
+	line = NULL;
+	size = 0;
 	row = 0;
 	while (row < map->rows)
 	{
