@@ -47,6 +47,7 @@ LIFE_SRCS    := $(LIFE_DIR)/main.c
 BSQ_SRCS     := $(BSQ_DIR)/main.c \
 				$(BSQ_DIR)/bsq.c
 
+# 🧱 Object files
 VECT2_OBJS   := $(VECT2_SRCS:.cpp=.o)
 BIGINT_OBJS  := $(BIGINT_SRCS:.cpp=.o)
 POLYSET_OBJS := $(POLYSET_SRCS:.cpp=.o)
@@ -76,6 +77,7 @@ OBJS := \
 
 # Default target
 .PHONY: all
+
 all: $(BINS)
 	@echo "✅ All Exam Rank 05 binaries built."
 
@@ -89,7 +91,9 @@ all: $(BINS)
 	@echo "🔧 Compiling C++ $<"
 	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Link each project
+# ============================================================
+#  Link Rules
+# ============================================================
 
 $(VECT2_BIN): $(VECT2_OBJS)
 	@echo "🔗 Linking $@"
@@ -133,24 +137,71 @@ bsq: $(BSQ_BIN)
 	@echo "✅ Built $(BSQ_BIN)"
 
 # ============================================================
-#  Run helpers (build + run)
+#  Per-project clean / rebuild
+# ============================================================
+
+.PHONY: clean_vect2 clean_bigint clean_polyset clean_life clean_bsq
+.PHONY: re_vect2 re_bigint re_polyset re_life re_bsq
+
+clean_vect2:
+	@echo "🧹 Cleaning vect2"
+	@rm -f $(VECT2_OBJS) $(VECT2_BIN)
+
+re_vect2: clean_vect2
+	@$(MAKE) --no-print-directory vect2
+	@echo "🔁 Rebuilt vect2."
+
+clean_bigint:
+	@echo "🧹 Cleaning bigint"
+	@rm -f $(BIGINT_OBJS) $(BIGINT_BIN)
+
+re_bigint: clean_bigint
+	@$(MAKE) --no-print-directory bigint
+	@echo "🔁 Rebuilt bigint."
+
+clean_polyset:
+	@echo "🧹 Cleaning polyset"
+	@rm -f $(POLYSET_OBJS) $(POLYSET_BIN)
+
+re_polyset: clean_polyset
+	@$(MAKE) --no-print-directory polyset
+	@echo "🔁 Rebuilt polyset."
+
+clean_life:
+	@echo "🧹 Cleaning Life"
+	@rm -f $(LIFE_OBJS) $(LIFE_BIN)
+
+re_life: clean_life
+	@$(MAKE) --no-print-directory life
+	@echo "🔁 Rebuilt Life."
+
+clean_bsq:
+	@echo "🧹 Cleaning BSQ"
+	@rm -f $(BSQ_OBJS) $(BSQ_BIN)
+
+re_bsq: clean_bsq
+	@$(MAKE) --no-print-directory bsq
+	@echo "🔁 Rebuilt BSQ."
+
+# ============================================================
+#  Run helpers
 # ============================================================
 
 .PHONY: run_vect2 run_bigint run_polyset run_life run_bsq run_all
 
-run_vect2: vect2
+run_vect2: re_vect2
 	@echo "🚀 Running vect2\n"
 	@$(VECT2_BIN)
 
-run_bigint: bigint
+run_bigint: re_bigint
 	@echo "🚀 Running bigint\n"
 	@$(BIGINT_BIN)
 
-run_polyset: polyset
+run_polyset: re_polyset
 	@echo "🚀 Running polyset\n"
 	@$(POLYSET_BIN) 1 2 3 4 5 5 3
 
-run_life: life
+run_life: re_life
 	@echo "🚀 Running Life\n"
 
 	@echo "🧪 Test 1: 5x5, 0 iterations"
@@ -172,7 +223,7 @@ run_life: life
 	@echo "🧪 Test 5: blinker 3x3, 2 iterations"
 	@echo 'dxss' | $(LIFE_BIN) 3 3 2 | cat -e
 
-run_bsq: bsq
+run_bsq: re_bsq
 	@echo "🚀 Running BSQ\n"
 
 	@echo "🧪 Test 1: subject example"
@@ -208,25 +259,25 @@ run_bsq: bsq
 	@echo
 
 run_all: all
-	@echo "🚀 Running all binaries (in order)"
-	@$(VECT2_BIN)   || true
-	@$(BIGINT_BIN)  || true
+	@echo "🚀 Running all binaries"
+	@$(VECT2_BIN) || true
+	@$(BIGINT_BIN) || true
 	@$(POLYSET_BIN) || true
-	@$(LIFE_BIN)    || true
-	@$(BSQ_BIN)     || true
+	@$(LIFE_BIN) || true
+	@$(BSQ_BIN) || true
 
 # ============================================================
-#  Cleanup
+#  Global Cleanup
 # ============================================================
 
 .PHONY: clean fclean re
 
 clean:
-	@echo "🧹 Cleaning object files"
+	@echo "🧹 Cleaning all object files"
 	@rm -f $(OBJS)
 
 fclean: clean
-	@echo "🗑  Removing binaries"
+	@echo "🗑  Removing all binaries"
 	@rm -f $(BINS)
 
 re: fclean all
