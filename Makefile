@@ -151,7 +151,25 @@ run_polyset: polyset
 
 run_life: life
 	@echo "🚀 Running Life\n"
-	@$(LIFE_BIN)
+
+	@echo "🧪 Test 1: 5x5, 0 iterations"
+	@echo 'sdxddssaaww' | $(LIFE_BIN) 5 5 0 | cat -e
+	@echo
+
+	@echo "🧪 Test 2: 10x6, 0 iterations"
+	@echo 'sdxssdswdxddddsxaadwxwdxwaa' | $(LIFE_BIN) 10 6 0 | cat -e
+	@echo
+
+	@echo "🧪 Test 3: blinker 3x3, 0 iterations"
+	@echo 'dxss' | $(LIFE_BIN) 3 3 0 | cat -e
+	@echo
+
+	@echo "🧪 Test 4: blinker 3x3, 1 iteration"
+	@echo 'dxss' | $(LIFE_BIN) 3 3 1 | cat -e
+	@echo
+
+	@echo "🧪 Test 5: blinker 3x3, 2 iterations"
+	@echo 'dxss' | $(LIFE_BIN) 3 3 2 | cat -e
 
 run_bsq: bsq
 	@echo "🚀 Running BSQ\n"
