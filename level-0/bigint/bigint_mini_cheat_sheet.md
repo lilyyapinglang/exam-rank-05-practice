@@ -1,5 +1,21 @@
 # bigint — Mini Cheat Sheet
 
+Main skeleton of the class: has 7 blocks
+```cpp
+class bigint{
+	private:
+
+	public:
+		//ctors
+		//+= + ++
+		//<<= <<
+		//>>= >>
+		//<= <
+		//>= >
+		//== !=
+};
+```
+
 ```text
 bigint = arbitrary precision unsigned integer
 
