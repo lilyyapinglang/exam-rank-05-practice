@@ -16,6 +16,17 @@ class bigint{
 };
 ```
 
+Main skeleton of the addition: has 7 blocks
+```cpp
+//1. 7 variables
+//2. 2 starts + 2 positions
+//3. while loop - 3 conditions
+//4. resets
+//5. take 2 digits
+//6. take 2 results
+//7. save, normalize, return
+```
+
 ```text
 bigint = arbitrary precision unsigned integer
 
