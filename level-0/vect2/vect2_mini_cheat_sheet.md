@@ -1,5 +1,21 @@
 # vect2 — Mini Cheat Sheet
 
+Main skeleton of the class: has 7 blocks
+```cpp
+class vect2{
+	private:
+
+	public:
+		//ctors
+		//+= -= *=
+		//+ - *
+		//++ --
+		//unary -
+		//[]
+		//== !=
+};
+```
+
 ```text
 vect2 = small C++ class for a 2D integer vector
 
