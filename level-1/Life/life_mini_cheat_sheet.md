@@ -2,6 +2,16 @@
 
 `Life` = Conway's Game of Life.
 
+Main steps to implement: 7 blocks:
+```cpp
+//1. struct + index
+//2. inside + draw
+//3. read input
+//4. count neighbors
+//5. step rules
+//6. clear + swap + simulate
+//7. print + main cleanup
+```
 The subject does not explicitly list the rules, but `game of life` usually means the classic Conway rules:
 
 ```txt
