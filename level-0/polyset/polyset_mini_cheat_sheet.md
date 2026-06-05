@@ -1,5 +1,31 @@
 # Polyset — Mini Cheat Sheet
 
+## Polyset mind map
+
+```cpp
+class searchable_array_bag
+{
+	//1. ctors
+	//2. has()
+};
+
+class searchable_tree_bag
+{
+	//1. ctors
+	//2. has()
+};
+
+class set
+{
+	//1. ctors
+	//2. public funcs from bag
+	//3. has()
+	//4. get_bag()
+};
+```
+
+---
+
 ```text
 array_bag stores values in an array
 tree_bag stores values in a binary search tree
