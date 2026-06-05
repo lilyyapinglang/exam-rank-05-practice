@@ -11,6 +11,17 @@ typedef struct s_life
 	char	*next;
 }	t_life;
 
+int	getindex(int x, int y, int width);
+int	inside(int x, int y, int width, int height);
+void	drawcell(t_life *life, int x, int y);
+void	readinput(t_life *life);
+int	countneighbors(t_life *life, int x, int y);
+void	step(t_life *life);
+void	swapboards(t_life *life);
+void	clearboard(char *board, int size);
+void	simulate(t_life *life);
+void	printboard(t_life *life);
+
 int	getindex(int x, int y, int width)
 {
 	return (y * width + x);
