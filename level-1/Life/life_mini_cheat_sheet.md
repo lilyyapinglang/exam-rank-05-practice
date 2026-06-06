@@ -7,8 +7,8 @@ Main steps to implement: 7 blocks:
 //1. struct + index
 //2. inside + draw
 //3. read input
-//4. count neighbors
-//5. step rules
+//4. count neighbors  = C DD NN (C  = count, DD = dx dy, NN = nx ny)
+//5. step rules = XY NP (XY = X Y, N  = neighbors, P  = pos)
 //6. clear + swap + simulate
 //7. print + main cleanup
 ```
