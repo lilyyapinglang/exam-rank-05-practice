@@ -1,4 +1,21 @@
-    # BSQ — Mini Cheat Sheet
+# BSQ — Mini Cheat Sheet
+
+```
+READ:
+parseHead + saveLine + readMap
+
+SOLVE:
+min3 + solveMap + fillSquare
+
+OUTPUT:
+printMap
+
+CLEAN:
+freeMap
+
+FLOW:
+processMap + main
+```
 
 ```text
 BSQ = biggest square
