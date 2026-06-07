@@ -12,6 +12,16 @@ typedef struct sMap
 	char	**grid;
 }	tMap;
 
+static void	initMap(tMap *map)
+{
+	map->rows = 0;
+	map->cols = 0;
+	map->empty = 0;
+	map->obs = 0;
+	map->full = 0;
+	map->grid = NULL;
+}
+
 static int	parseHead(FILE *file, tMap *map)
 {
 	if (fscanf(file, "%d %c %c %c\n", &map->rows,
@@ -189,16 +199,6 @@ void	freeMap(tMap *map)
 		row++;
 	}
 	free(map->grid);
-	map->grid = NULL;
-}
-
-static void	initMap(tMap *map)
-{
-	map->rows = 0;
-	map->cols = 0;
-	map->empty = 0;
-	map->obs = 0;
-	map->full = 0;
 	map->grid = NULL;
 }
 
