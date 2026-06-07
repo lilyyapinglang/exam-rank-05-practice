@@ -44,8 +44,7 @@ POLYSET_SRCS := $(POLYSET_DIR)/given-code/main.cpp \
 				$(POLYSET_DIR)/searchable_tree_bag.cpp \
 				$(POLYSET_DIR)/set.cpp
 LIFE_SRCS    := $(LIFE_DIR)/main.c
-BSQ_SRCS     := $(BSQ_DIR)/main.c \
-				$(BSQ_DIR)/bsq.c
+BSQ_SRCS     := $(BSQ_DIR)/main.c
 
 # 🧱 Object files
 VECT2_OBJS   := $(VECT2_SRCS:.cpp=.o)
