@@ -17,6 +17,22 @@ FLOW:
 processMap + main
 ```
 
+```cpp
+//1. struct + init - store all map information and reset it before use
+
+//2. parseHead - read the first line of the format: rows empty obstacle full, for example "9 . o x"
+
+//3. saveLine - check one map line, set/compare the width, and save it to the grid
+
+//4. readMap - read the entire map: header, grid lines, check the number of lines and extra input
+
+//5. solveMap - find the largest square using the DP formula min(top, left, diagonal) + 1
+
+//6. fill + print + free - fill the found square, print the map, and free memory
+
+//7. processMap + main - tie everything together: open input, process the map, display the result, or return a map error
+```
+
 ```text
 BSQ = biggest square
 
