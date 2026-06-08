@@ -130,8 +130,8 @@ int	solveMap(tMap *map)
 	int	*dp;
 	int	row;
 	int	col;
-	int	prev;
-	int	save;
+	int	diag;
+	int	oldTop;
 	int	bestSize;
 	int	bestRow;
 	int	bestCol;
@@ -145,16 +145,16 @@ int	solveMap(tMap *map)
 	row = 1;
 	while (row <= map->rows)
 	{
-		prev = 0;
+		diag = 0;
 		col = 1;
 		while (col <= map->cols)
 		{
-			save = dp[col];
+			oldTop = dp[col];
 			if (map->grid[row - 1][col - 1] == map->obs)
 				dp[col] = 0;
 			else
 			{
-				dp[col] = min3(dp[col], dp[col - 1], prev) + 1;
+				dp[col] = min3(dp[col], dp[col - 1], diag) + 1;
 				if (dp[col] > bestSize)
 				{
 					bestSize = dp[col];
@@ -162,7 +162,7 @@ int	solveMap(tMap *map)
 					bestCol = col - 1;
 				}
 			}
-			prev = save;
+			diag = oldTop;
 			col++;
 		}
 		row++;
