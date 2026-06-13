@@ -1,6 +1,6 @@
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/types.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
 
 typedef struct sMap
 {
@@ -10,7 +10,7 @@ typedef struct sMap
 	char	obs;
 	char	full;
 	char	**grid;
-}	tMap;
+}			tMap;
 
 static void	initMap(tMap *map)
 {
@@ -22,10 +22,20 @@ static void	initMap(tMap *map)
 	map->grid = NULL;
 }
 
-static int	parseHead(FILE *file, tMap *map)
+int	parseHead(FILE *file, tMap *map)
 {
-	if (fscanf(file, "%d %c %c %c\n", &map->rows,
-			&map->empty, &map->obs, &map->full) != 4)
+	char	sep1;
+	char	sep2;
+	char	sep3;
+	char	end;
+
+	if (fscanf(file, "%d%c%c%c%c%c%c%c", 
+			&map->rows, &sep1, &map->empty, &sep2,
+			&map->obs, &sep3, &map->full, &end) != 8)
+		return (0);
+	if (sep1 != ' ' || sep2 != ' ' || sep3 != ' ')
+		return (0);
+	if (end != '\n')
 		return (0);
 	if (map->rows <= 0)
 		return (0);
@@ -221,8 +231,8 @@ static int	processMap(FILE *file)
 
 int	main(int argc, char **argv)
 {
-	FILE	*file;
-	int		i;
+	FILE *file;
+	int i;
 
 	if (argc == 1)
 		return (processMap(stdin));
