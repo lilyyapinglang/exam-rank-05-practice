@@ -245,15 +245,19 @@ run_bsq: re_bsq
 	@$(BSQ_BIN) $(BSQ_DIR)/tests/map4_priority | cat -e
 	@echo
 
-	@echo "🧪 Test 6: bad map, different line width"
+	@echo "🧪 Test 6: white space test"
+	@$(BSQ_BIN) $(BSQ_DIR)/tests/map5_whitespace | cat -e
+	@echo
+
+	@echo "🧪 Test 7: bad map, different line width"
 	@$(BSQ_BIN) $(BSQ_DIR)/tests/bad1_width 2>&1 | cat -e
 	@echo
 
-	@echo "🧪 Test 7: bad map, same chars"
+	@echo "🧪 Test 8: bad map, same chars"
 	@$(BSQ_BIN) $(BSQ_DIR)/tests/bad2_same_chars 2>&1 | cat -e
 	@echo
 
-	@echo "🧪 Test 8: bad map, extra line"
+	@echo "🧪 Test 9: bad map, extra line"
 	@$(BSQ_BIN) $(BSQ_DIR)/tests/bad3_extra_line 2>&1 | cat -e
 	@echo
 
