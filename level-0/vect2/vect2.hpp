@@ -1,7 +1,6 @@
 #ifndef VECT2_HPP
 #define VECT2_HPP
 
-#include "vect2.hpp"
 #include <iostream>
 
 class vect2
