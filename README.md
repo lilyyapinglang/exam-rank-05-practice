@@ -251,11 +251,27 @@ Border-policy cases are stored in:
 level-1/Life/tests/policy/
 ```
 
-Build and run the complete Life test suite from the repository root:
+#### Run the Life tests
+
+From the `level-1/Life` directory:
 
 ```bash
-make life
-bash level-1/Life/tests/run-tests.sh level-1/Life/life
+make -C ../.. life
+./tests/run-tests.sh
+```
+
+Or, if the program is already compiled:
+
+```bash
+cd level-1/Life
+./tests/run-tests.sh
+```
+
+The script uses `./life` as the default executable.
+A different executable can also be passed explicitly:
+
+```bash
+./tests/run-tests.sh ./life
 ```
 
 ### BSQ tester
@@ -286,11 +302,27 @@ level-1/BSQ/tests/expected-out/
 level-1/BSQ/tests/expected-err/
 ```
 
-Build and run the complete BSQ test suite from the repository root:
+#### Run the BSQ tests
+
+From the `level-1/BSQ` directory:
 
 ```bash
-make bsq
-bash level-1/BSQ/tests/run-tests.sh level-1/BSQ/bsq
+make -C ../.. bsq
+./tests/run-tests.sh
+```
+
+Or, if the program is already compiled:
+
+```bash
+cd level-1/BSQ
+./tests/run-tests.sh
+```
+
+The script uses `./bsq` as the default executable.
+A different executable can also be passed explicitly:
+
+```bash
+./tests/run-tests.sh ./bsq
 ```
 
 A successful test run displays the number of passed and failed tests and exits
