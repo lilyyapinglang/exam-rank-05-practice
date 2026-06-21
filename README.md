@@ -148,9 +148,6 @@ make run_polyset
 make run_life
 make run_bsq
 
-# Build and run all projects
-make run_all
-
 # Clean object files and binaries
 make clean   # remove all .o files
 make fclean  # remove .o files and all binaries
