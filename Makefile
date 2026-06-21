@@ -186,7 +186,7 @@ re_bsq: clean_bsq
 #  Run helpers
 # ============================================================
 
-.PHONY: run_vect2 run_bigint run_polyset run_life run_bsq run_all
+.PHONY: run_vect2 run_bigint run_polyset run_life run_bsq
 
 run_vect2: re_vect2
 	@echo "🚀 Running vect2\n"
@@ -260,14 +260,6 @@ run_bsq: re_bsq
 	@echo "🧪 Test 9: bad map, extra line"
 	@$(BSQ_BIN) $(BSQ_DIR)/tests/bad3_extra_line 2>&1 | cat -e
 	@echo
-
-run_all: all
-	@echo "🚀 Running all binaries"
-	@$(VECT2_BIN) || true
-	@$(BIGINT_BIN) || true
-	@$(POLYSET_BIN) || true
-	@$(LIFE_BIN) || true
-	@$(BSQ_BIN) || true
 
 # ============================================================
 #  Global Cleanup
