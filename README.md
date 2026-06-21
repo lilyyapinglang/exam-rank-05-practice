@@ -11,6 +11,8 @@ This repository is **only for personal study and revision**:
 
 * It is **not** an official 42 resource.
 * It is **not** meant to be used during the actual exam.
+* Exercise subjects and supplied starter code were not written by me.
+* The subjects may change, so always follow the version provided during your exam.
 * Please respect your campus rules and the spirit of the project.
 
 Use it to **understand concepts**, re-implement exercises on your own, and build your muscle memory in C/C++.
@@ -22,7 +24,7 @@ Use it to **understand concepts**, re-implement exercises on your own, and build
 The repository is organized by exam level and assignment:
 
 ```text
-exam-rank-05/
+42-exam-rank-05/
 ├── level-0
 │   ├── vect2/
 │   ├── bigint/
@@ -32,7 +34,8 @@ exam-rank-05/
     └── BSQ/
 ```
 
-Each directory contains my practice implementation and simple test code.
+Each exercise directory contains the subject, my practice implementation,
+test files where applicable, and a compact revision cheat sheet.
 
 ---
 
@@ -69,17 +72,20 @@ Typical things to practice:
 
 ### level-0 / `polyset`
 
-A C++ exercise around sets / polynomials depending on the given subject version:
+A C++ exercise focused on abstract classes, multiple inheritance and container wrappers:
 
-* Practices containers, parsing, and class logic.
-* Focuses on clean data representation.
-* Requires careful handling of duplicates, ordering, and edge cases.
-* Good exercise after `vect2` and `bigint`, because it is more specific.
+* Extends `array_bag` and `tree_bag` with a searchable interface.
+* Implements `has()` for an array and a binary search tree.
+* Wraps a `searchable_bag` inside a `set`.
+* Prevents duplicate values from being inserted.
+* Practices Orthodox Canonical Form and const correctness.
+
+The exercise includes supplied base classes inside the `given-code` directory.
 
 > ⚠️ NOTE:
 >
-> The exact subject can vary depending on the exam version or repository source.
-> Always read the provided `subject.txt` before implementing.
+> Always read the provided `subject.txt` and inspect the supplied classes
+> before implementing the missing files.
 
 ---
 
@@ -87,7 +93,7 @@ A C++ exercise around sets / polynomials depending on the given subject version:
 
 A small implementation of Conway’s Game of Life:
 
-* Reads an initial map / pattern.
+* Draws the initial board using movement and pen commands from standard input.
 * Applies the Game of Life rules for a given number of iterations.
 * Handles a 2D grid and neighbor counting.
 * Good exercise for arrays, loops, boundary checks, and simulation logic.
@@ -111,10 +117,11 @@ The classic “Biggest Square” algorithm:
 
 Typical approach:
 
-* Convert the map into a numeric DP grid.
-* For each empty cell, compute the biggest square ending at that position.
+* Parse and validate the complete map.
+* Use dynamic programming to compute the biggest square ending at each cell.
+* Keep only one DP row to reduce additional memory usage.
 * Track the maximum size and its coordinates.
-* Replace the final square in the output map.
+* Replace the selected empty cells with the full character.
 
 > ⚠️ NOTE:
 >
@@ -181,6 +188,6 @@ My suggested order for preparing this exam:
 |     1 | `vect2`   | Best C++ warm-up: classes, operators, clean syntax               |
 |     2 | `bigint`  | Strong practice for operator overloading and number/string logic |
 |     3 | `polyset` | More specific C++ exercise, better after the basics              |
-|     4 | `Life`    | Very likely and important C exercise with grid simulation        |
+|     4 | `Life`    | Important C exercise for grid handling and simulation            |
 |     5 | `BSQ`     | More algorithmic, better after the base is solid                 |
 
