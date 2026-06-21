@@ -67,17 +67,36 @@ full  = 'x'
 Important:
 
 ```c
-fscanf(file, "%d %c %c %c", &map->rows,
-    &map->empty, &map->obs, &map->full);
+char sep1;
+char sep2;
+char sep3;
+char end;
+
+if (fscanf(file, "%d%c%c%c%c%c%c%c",
+        &map->rows,
+        &sep1,
+        &map->empty,
+        &sep2,
+        &map->obs,
+        &sep3,
+        &map->full,
+        &end) != 8)
+    return (0);
+
+if (sep1 != ' ' || sep2 != ' ' || sep3 != ' ')
+    return (0);
+if (end != '\n')
+    return (0);
 ```
 
-Do not use:
+Why:
 
-```c
-"%d%c%c%c"
+```text
+%c reads every character, including spaces and '\n'.
+
+Reading the separators validates the exact header format.
+The final '\n' must be consumed before the first getline call.
 ```
-
-Because `%c` reads spaces too.
 
 ## Map validation
 
@@ -188,14 +207,15 @@ real width = len - 1.
 
 Use fputs, not printf/write/fputc.
 
-Header must be read with spaces:
-"%d %c %c %c"
+Read and validate the three spaces and the final '\n' explicitly.
+Do not leave the header newline unread before getline.
 ```
 
 ## Files to implement
 
 ```text
-main.c
-bsq.c
-bsq.h
+*.c
+*.h
 ```
+This repository keeps the complete solution in `main.c`.
+Splitting it into `bsq.c` and `bsq.h` is optional.
