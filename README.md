@@ -206,6 +206,102 @@ make re      # full rebuild (fclean + all)
 
 ---
 
+## 🧪 Level 1 Test Suites
+
+I wrote dedicated Bash test suites for both Level 1 exercises:
+
+* `Life`
+* `BSQ`
+
+The testers contain a comprehensive collection of normal cases, edge cases,
+invalid inputs and output comparisons.
+
+Each test is executed with a timeout to detect infinite loops or programs
+waiting unexpectedly for additional input.
+
+### Life tester
+
+The `Life` tester checks:
+
+* Different board sizes and iteration counts.
+* Empty and populated boards.
+* Stable patterns and oscillators.
+* Drawing commands and pen behavior.
+* Output formatting.
+* Unexpected output on `stderr`.
+* Execution timeouts.
+* Border-movement policy cases.
+
+The tester compares the program output with the expected output stored in:
+
+```text
+level-1/Life/tests/expected/
+```
+
+Arguments and input commands are stored separately in:
+
+```text
+level-1/Life/tests/args/
+level-1/Life/tests/input/
+```
+
+Border-policy cases are stored in:
+
+```text
+level-1/Life/tests/policy/
+```
+
+Build and run the complete Life test suite from the repository root:
+
+```bash
+make life
+bash level-1/Life/tests/run-tests.sh level-1/Life/life
+```
+
+### BSQ tester
+
+The `BSQ` tester checks:
+
+* Valid maps of different dimensions.
+* Empty and obstacle-filled maps.
+* Selection priority for equal-size squares.
+* Whitespace characters used as map symbols.
+* Invalid headers.
+* Invalid characters.
+* Different row widths.
+* Missing or additional rows.
+* Output written to both `stdout` and `stderr`.
+* Execution timeouts.
+
+Input maps are stored in:
+
+```text
+level-1/BSQ/tests/input/
+```
+
+Expected standard output and error output are stored separately in:
+
+```text
+level-1/BSQ/tests/expected-out/
+level-1/BSQ/tests/expected-err/
+```
+
+Build and run the complete BSQ test suite from the repository root:
+
+```bash
+make bsq
+bash level-1/BSQ/tests/run-tests.sh level-1/BSQ/bsq
+```
+
+A successful test run displays the number of passed and failed tests and exits
+with a non-zero status if at least one strict test fails.
+
+> These testers are additional practice tools written for this repository.
+> They are not official 42 testers and cannot guarantee that every possible
+> exam edge case is covered.
+
+---
+
 ## 📖 How I Use This Repo
 
 * Re-implement exercises **from scratch** without copy-paste.
