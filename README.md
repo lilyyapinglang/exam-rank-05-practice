@@ -123,6 +123,47 @@ Typical approach:
 * Track the maximum size and its coordinates.
 * Replace the selected empty cells with the full character.
 
+### Header parsing edge case
+
+The map characters can be printable characters, including whitespace.
+For example, the empty character itself may be a space.
+
+Because of this, avoid parsing the header like this:
+
+```c
+fscanf(file, "%d %c %c %c\n",
+    &map->rows, &map->empty, &map->obs, &map->full);
+```
+
+Whitespace characters inside an `fscanf` format string do not match exactly one
+space or one newline. They consume any amount of consecutive whitespace.
+
+This can cause two important problems:
+
+* An empty character represented by a space may be skipped instead of stored.
+* The final `\n` may consume spaces from the beginning of the first map row.
+
+A safer approach is to read every separator and the final newline explicitly:
+
+```c
+char sep1;
+char sep2;
+char sep3;
+char end;
+
+if (fscanf(file, "%d%c%c%c%c%c%c%c", 
+			&map->rows, &sep1, &map->empty, &sep2,
+			&map->obs, &sep3, &map->full, &end) != 8)
+    return (0);
+if (sep1 != ' ' || sep2 != ' ' || sep3 != ' ')
+    return (0);
+if (end != '\n')
+    return (0);
+```
+
+This validates the exact header format, supports whitespace map characters,
+and ensures that the next `getline` starts at the first real map row.
+
 > ⚠️ NOTE:
 >
 > `BSQ` is usually more algorithmically demanding than the other exercises.
