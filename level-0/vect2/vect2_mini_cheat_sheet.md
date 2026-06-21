@@ -73,7 +73,7 @@ unary -
 
 ```cpp
 int &operator[](int index);
-int operator[](int index) const;
+const int &operator[](int index) const;
 ```
 
 ```text
@@ -133,8 +133,8 @@ vect2 is mostly operator overloading practice.
 ## Remember
 
 ```text
-Non-const [] returns reference, so v[1] = 12 works.
-Const [] returns value, so const vect2 can be read.
+Non-const [] returns a reference, so v[1] = 12 works.
+Const [] returns a const reference, so const vect2 can be read but not modified.
 ```
 
 ## Files to implement
