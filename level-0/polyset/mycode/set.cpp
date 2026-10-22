@@ -1,7 +1,10 @@
 #include "set.hpp"
 #include <iostream>
 
-set::set(searchable_bag &bag) : bag(bag)
+set::set() : bag(0)
+{
+}
+set::set(searchable_bag &bag) : bag(&bag)
 {
 }
 
@@ -22,35 +25,50 @@ set::~set()
 
 void set::insert(int value)
 {
-	if (!bag.has(value))
-		bag.insert(value);
+	if (bag == 0)
+		return ;
+	if (bag->has(value) == false)
+		bag->insert(value);
 }
 
 void set::insert(int *items, int count)
 {
+	if (bag == 0)
+		return ;
 	for (int i = 0; i < count; i++)
 	{
-		if (!bag.has(items[i]))
-			bag.insert(items[i]);
+		if (bag->has(items[i]) == false)
+			bag->insert(items[i]);
 	}
 }
 
 void set::print() const
 {
-	bag.print();
+	if (bag == 0)
+		return ;
+	bag->print();
 }
 
 void set::clear()
 {
-	bag.clear();
+	if (bag == 0)
+		return ;
+	bag->clear();
 }
 
 bool set::has(int value) const
 {
-	return (bag.has(value));
+	if (bag == 0)
+		return (false);
+	return (bag->has(value));
 }
 
 const searchable_bag &set::get_bag() const
 {
-	return (bag);
+	return (*bag);
+}
+
+searchable_bag &set::get_bag()
+{
+	return (*bag);
 }
