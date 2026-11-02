@@ -7,6 +7,14 @@ typedef struct point
 	int		x;
 	int		y;
 }			t_point;
+
+typedef struct area
+{
+	t_point	top_left;
+	t_point	bottom_right;
+	int		area;
+}			t_area;
+
 typedef struct map
 {
 	int		num_of_lines;
@@ -14,32 +22,59 @@ typedef struct map
 	char	obs_ch;
 	char	full_ch;
 	char	**grid;
+	int		line_length;
 	int		biggest_area;
 	t_point	top_left;
 	t_point	bottom_right;
 }			t_map;
 
-int	get_biggest_area_with_top_left(t_map *map, int i, int j)
+int	get_area(t_point top_left, t_point bottom_right)
+{
+	return (bottom_right.x - top_left.x + 1) * (bottom_right.y - top_left.y
+		+ 1);
+}
+
+t_area	get_biggest_area_with_top_left(t_map *map, int i, int j)
 {
 	t_point	top_left;
+	t_point	bottom_right;
 	int		area;
+	int		furtherest_obs_index_so_far;
+	int		furtherest_y;
+	int		biggest_area;
+	t_area	current_starting_point;
 
 	top_left.x = i;
 	top_left.y = j;
+	bottom_right.x = i;
+	bottom_right.y = j;
+	furtherest_obs_index_so_far = map->line_length;
 	area = 1;
+	biggest_area = 1;
 	// go right first and then go down
 	while (i < map->num_of_lines)
 	{
-		while (map->grid[i + 1] != map->obs_ch || map->grid[i + 1] != '\n')
-		// i continue go right until obstackes
+		while ((map->grid[i][j] != map->obs_ch || map->grid[i][j] != '\n')
+			&& j < furtherest_obs_index_so_far)
+			// i continue go right until obstackes
+			j++;
+		bottom_right.x = i;
+		bottom_right.y = j;
+		area = get_area(top_left, bottom_right);
+		if (j < furtherest_obs_index_so_far)
+			furtherest_obs_index_so_far = j;
+		if (area > biggest_area)
 		{
-			area++;
-		}
-		else
-		{ // i go down
+			area = biggest_area;
+			bottom_right.x = i;
+			bottom_right.y = j;
 		}
 		i++;
 	}
+	current_starting_point.top_left = top_left;
+	current_starting_point.bottom_right = bottom_right;
+	current_starting_point.area = biggest_area;
+	return (current_starting_point);
 }
 
 void	find_biggest_square(t_map *map)
