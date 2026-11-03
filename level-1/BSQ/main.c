@@ -134,7 +134,7 @@ void	print_map(t_map *map)
 	int	i;
 
 	i = 1;
-	while (map->grid[i])
+	while (i < map->num_of_lines)
 	{
 		fprintf(stdout, "%s", map->grid[i]);
 		i++;
@@ -195,9 +195,11 @@ int	main(int ac, char **av)
 		for (int i = 0; i < nread; i++)
 		{
 			test.grid[line_number][i] = line[i];
+			printf("test.grid[line_number][i] %c\n", test.grid[line_number][i]);
 			i++;
 		}
-		test.grid[line_number][nread] = '\n';
+		test.grid[line_number][nread] = '\0';
+		printf("test.grid[line_number][nread] %s\n", test.grid[line_number]);
 		// fwrite(line, nread, 1, stdout);
 		// test.grid[line_number] = line;
 		line_number++;
