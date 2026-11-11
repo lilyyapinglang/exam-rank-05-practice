@@ -6,7 +6,7 @@ CC = cc
 # -Wall -Wextra:编译器警告往往直接指出问题,
 CFLAGS = -Wextra -Wall -Werror -g -O0
 
-SRCS = main.c
+SRCS = main_dp.c
 OBJS =$(SRCS:.c=.o)
 
 
