@@ -13,6 +13,8 @@ typedef struct s_game
 // free row first, then the **pointer.
 static void	free_grid(char **g, int rows)
 {
+	if (!g)
+		return ;
 	for (int i = 0; i < rows; i++)
 		free(g[i]);
 	free(g);
@@ -35,6 +37,7 @@ static char	**alloc_grid(int w, int h)
 			free_grid(g, r);
 			return (NULL);
 		}
+		// fill this row with space
 		for (int c = 0; c < w; c++)
 			g[r][c] = ' ';
 	}
@@ -47,13 +50,14 @@ static void	draw_init_board(t_game *g)
 	int		row;
 	char	c;
 	int		col;
-	int		pen;
+	int		pen_status;
 
-	row = 0, col = 0, pen = 0;
+	row = 0, col = 0, pen_status = 0;
+	// i read from standard input , one char by one char
 	while (read(STDIN_FILENO, &c, 1) > 0)
 	{
 		if (c == 'x')
-			pen = !pen;
+			pen_status = !pen_status;
 		else if (c == 'w' && row > 0)
 			row--;
 		else if (c == 's' && row < g->height - 1)
@@ -62,7 +66,7 @@ static void	draw_init_board(t_game *g)
 			col--;
 		else if (c == 'd' && col < g->width - 1)
 			col++;
-		if (pen)
+		if (pen_status)
 			g->grid[row][col] = 'O';
 	}
 }
@@ -100,7 +104,7 @@ static int	count_alive_neighbors(t_game *game, int cell_row, int cell_col)
 }
 
 // Returns 0 on success, 1 if memory allocation failed.
-static int	compute_next_generation(t_game *game)
+static int	is_compute_next_generation_failed(t_game *game)
 {
 	char	**next_grid;
 	int		alive_neighbors;
@@ -149,12 +153,13 @@ int	main(int ac, char **av)
 	g.grid = alloc_grid(g.width, g.height);
 	if (!g.grid)
 		return (1);
+	// i got a grid of ' '
 	// read char by char to draw the bord
 	draw_init_board(&g);
 
 	// iterations
 	for (int i = 0; i < g.iterations; i++)
-		if (compute_next_generation(&g))
+		if (is_compute_next_generation_failed(&g))
 			return (1);
 
 	// print grid
