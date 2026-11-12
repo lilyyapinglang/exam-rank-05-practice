@@ -52,7 +52,7 @@ void	draw_init_board(char *cmd, t_game *game)
 		{
 			putchar('!');
 			return ;
-		}
+		} 
 		if (game->pen_draw == 1)
 			game->grid[game->pen_pos.x][game->pen_pos.y] = 'O';
 		cmd++;
