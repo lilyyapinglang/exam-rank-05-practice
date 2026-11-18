@@ -221,6 +221,7 @@ static void	fill_row(t_map *map, int line_idx, int *prev_row, int *curr_row)
 	j = 0;
 	while (j < map->line_length)
 	{
+		// if it is obstacle, size =0;
 		if (map->grid[line_idx][j] == map->obs_ch)
 			curr_row[j] = 0;
 		else if (line_idx == 0 || j == 0)

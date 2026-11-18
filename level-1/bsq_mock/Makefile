@@ -1,10 +1,8 @@
-
-
 NAME = bsq
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g -o0
+CFLAGS = -Wall -Wextra -Werror -g -O0
 
 SRCS = main.c
 
@@ -20,10 +18,10 @@ $(NAME):$(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm rf $(OBJS)
+	rm -rf $(OBJS)
 
 fclean: clean
-	rm rf $(NAME)
+	rm -rf $(NAME)
 
 
 re : fclean all
