@@ -16,6 +16,7 @@ typedef struct map
 	char	full_ch;
 	char	**grid;
 	int		line_length;
+	int		best_side;
 	int		biggest_area;
 	t_point	top_left;
 	t_point	bottom_right;
@@ -47,7 +48,7 @@ void	free_grid(char **grid, int num_of_lines)
 
 int	is_printable(char a)
 {
-	if (a >= 33 && a <= 126)
+	if (a >= 32 && a <= 126)
 		return (1);
 	else
 		return (0);
@@ -55,9 +56,9 @@ int	is_printable(char a)
 
 int	check_args(t_map *map)
 {
-	// check if char is printable. 33-126
-	if (!(is_printable(map->empty_ch) && is_printable(map->full_ch)
-			&& is_printable(map->obs_ch)))
+	// check if char is printable. 32-126
+	if (!is_printable(map->empty_ch) || !is_printable(map->full_ch)
+		|| !is_printable(map->obs_ch))
 		return (0);
 	// check if two chars identical
 	if (map->empty_ch == map->full_ch || map->full_ch == map->obs_ch
@@ -89,7 +90,7 @@ void	replace_full_chars(t_map *map)
 	//  int fputs(const char *restrict s, FILE *restrict stream);
 	// if top_left and bottom_right are all o,
 	// it will be changed to x.so need to check!
-	if (map->biggest_area == 0)
+	if (map->best_side == 0)
 		return ;
 	i = map->top_left.x;
 	while (i <= map->bottom_right.x)
@@ -236,7 +237,7 @@ static void	fill_row(t_map *map, int line_idx, int *prev_row, int *curr_row)
 	}
 }
 
-void	find_biggest_square(t_map *map)
+int	find_biggest_square(t_map *map)
 {
 	int	*prev_row;
 	int	*curr_row;
@@ -251,7 +252,7 @@ void	find_biggest_square(t_map *map)
 	{
 		free(prev_row);
 		free(curr_row);
-		return ;
+		return (1);
 	}
 	// from line =0;
 	line_idx = 0;
@@ -271,6 +272,7 @@ void	find_biggest_square(t_map *map)
 	}
 	free(prev_row);
 	free(curr_row);
+	return (0);
 }
 
 int	solve(FILE *stream)
@@ -285,7 +287,12 @@ int	solve(FILE *stream)
 		return (1);
 	}
 	// map successully loaded, algo part
-	find_biggest_square(&map);
+	if (!find_biggest_square(&map))
+	{
+		free_grid(map.grid, map.num_of_lines);
+		fprintf(stderr, "map error\n");
+		return (1);
+	}
 	replace_full_chars(&map); // fputs
 	print_map(&map);          // fprintf
 	free_grid(map.grid, map.num_of_lines);
